@@ -1,0 +1,8 @@
+name: organize
+version: 0.1.0
+description: AI-powered vault organization suggestions
+author: AnotherMe
+entrypoint: plugin
+capabilities:
+  - routes
+dependencies: []
