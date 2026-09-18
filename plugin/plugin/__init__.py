@@ -3,11 +3,11 @@ import logging
 
 from fastapi import APIRouter, HTTPException
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class OrganizeRequest(BaseModel):
-    instructions: str
+    instructions: str = Field(min_length=1, max_length=8000)
 
 
 class OrganizeResponse(BaseModel):
@@ -32,7 +32,7 @@ class Plugin:
                 )
             except Exception as e:
                 logging.getLogger(__name__).exception("Organize failed")
-                raise HTTPException(500, f"Failed to organize: {e}")
+                raise HTTPException(500, "Failed to organize vault")
             return OrganizeResponse(suggestions=suggestions)
 
         ctx.register_router(router)
